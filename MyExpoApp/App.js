@@ -1,19 +1,26 @@
-// Importujemy komponent StatusBar z expo-status-bar oraz komponenty StyleSheet, Text i View z react-native
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+// Importujemy niezbędne moduły i komponenty
+import React from "react"; // Importujemy bibliotekę React, która umożliwia tworzenie komponentów
+import { NavigationContainer } from "@react-navigation/native"; // Importujemy kontener nawigacyjny, który zarządza stanem nawigacji
+import { createNativeStackNavigator } from "@react-navigation/native-stack"; // Importujemy funkcję do tworzenia stosu nawigacyjnego
+import HomeScreen from "./screens/HomeScreen"; // Importujemy komponent ekranu głównego
+import DetailsScreen from "./screens/DetailsScreen"; // Importujemy komponent ekranu szczegółów
+import { StyleSheet } from "react-native"; // Importujemy StyleSheet do definiowania stylów
 
-// Funkcja App to główny komponent aplikacji, który zostanie wyrenderowany
+// Tworzymy stos nawigacyjny (stack navigator)
+const Stack = createNativeStackNavigator();
+
 export default function App() {
+  // Zwracamy główny komponent aplikacji, który zawiera kontener nawigacyjny i stos ekranów
   return (
-    // Komponent View działa jako kontener dla innych komponentów
-    // Przypisujemy mu styl zdefiniowany w obiekcie styles
-    <View style={styles.container}>
-      {/* Komponent Text wyświetla tekst na ekranie */}
-      <Text>Open up App.js to start working on your app!</Text>
-      {/* Komponent StatusBar pozwala zarządzać paskiem stanu (status bar) */}
-      {/* style="auto" oznacza, że pasek stanu dostosuje się automatycznie do tła */}
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      {/* Definiujemy stos ekranów w aplikacji */}
+      <Stack.Navigator initialRouteName="Home">
+        {/* Definiujemy ekran główny, nazywając go "Home" */}
+        <Stack.Screen name="Home" component={HomeScreen} />
+        {/* Definiujemy ekran szczegółów, nazywając go "Details" */}
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
